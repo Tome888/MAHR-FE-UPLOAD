@@ -25,7 +25,7 @@ const translationsMap: Record<string, Record<string, string>> = {
 };
 function signLogIn() {
   const { userData, token, setUserData, setToken } = useAuthContext();
-  const { language, toggleLanguage } = useLanguage();
+  const { language } = useLanguage();
   const translations = translationsMap[language];
   const router = useRouter();
 

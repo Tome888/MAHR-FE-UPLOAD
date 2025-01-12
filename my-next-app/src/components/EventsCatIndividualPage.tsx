@@ -22,8 +22,8 @@ function EventsCatIndividualPage({
   const router = useRouter();
   const [arrData, setArrData] = useState<DataProps[] | null>(null);
   const [arrDataFull, setArrDataFull] = useState<DataProps[] | []>([]);
-  const [toggler, setToggler] = useState(false);
-  const [downloadAll, setDownaloadAll] = useState(0);
+  const [toggler] = useState(false);
+  const [downloadAll] = useState(0);
 
   useEffect(() => {
     fetch(
@@ -34,7 +34,7 @@ function EventsCatIndividualPage({
         setArrData(data);
       })
       .catch((err) => console.error(err));
-  }, [router]);
+  }, [router, getCategory]);
 
   const downloadCards = () => {
     if (downloadAll <= 0) {
