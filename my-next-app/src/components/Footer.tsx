@@ -1,7 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { en } from "@/translations/en";
 import { mk } from "@/translations/mk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const translationsMap: Record<string, Record<string, string>> = {
   en,
   mk,
@@ -12,6 +12,13 @@ function Footer() {
   const [popup, setPopup] = useState(false);
   const { language, toggleLanguage } = useLanguage();
   const translations = translationsMap[language];
+  useEffect(() => {
+    // This runs only once after the component mounts
+    fetch('https://mahr-api.onrender.com/subscribe/?id=-wa76KG')
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error('Error fetching data L:', error));
+  }, []);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
