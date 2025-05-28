@@ -22,7 +22,7 @@ function Footer() {
 
     try {
       const response = await fetch(
-        "https://irradiated-snow-brow.glitch.me/subscribe",
+        "https://mahr-api.onrender.com/subscribe",
         {
           method: "POST",
           headers: {
