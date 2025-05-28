@@ -47,7 +47,7 @@ function Footer() {
     fetch("https://mahr-api.onrender.com/subscribe/?id=-wa76KG")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[0].id, "Wake Up DB");
+        console.log(data, "Wake Up DB");
         setWake(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
