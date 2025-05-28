@@ -1,7 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { en } from "@/translations/en";
 import { mk } from "@/translations/mk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const translationsMap: Record<string, Record<string, string>> = {
   en,
   mk,
@@ -9,6 +9,8 @@ const translationsMap: Record<string, Record<string, string>> = {
 
 function Footer() {
   const [email, setEmail] = useState("");
+  const [wake, setWake] = useState<any>();
+
   const [popup, setPopup] = useState(false);
   const { language, toggleLanguage } = useLanguage();
   const translations = translationsMap[language];
@@ -21,16 +23,13 @@ function Footer() {
     }
 
     try {
-      const response = await fetch(
-        "https://mahr-api.onrender.com/subscribe",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
+      const response = await fetch("https://mahr-api.onrender.com/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
       if (response.ok) {
         setPopup(true);
@@ -43,6 +42,16 @@ function Footer() {
       alert("An error occurred. Please try again.");
     }
   };
+
+  useEffect(() => {
+    fetch("https://mahr-api.onrender.com/subscribe/?id=-wa76KG")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].id, "Wake Up DB");
+        setWake(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
   return (
     <footer>
